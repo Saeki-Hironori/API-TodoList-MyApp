@@ -9,6 +9,10 @@ const index = () => {
 
   useEffect(() => {
     if (status === "unauthenticated") router.push("/signup");
+    console.log(session);
+    fetch("/api/hello")
+      .then((res) => res.json())
+      .then(console.log);
   }, [status]);
 
   const handleSignout = (e: any) => {

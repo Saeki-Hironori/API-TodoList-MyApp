@@ -23,13 +23,13 @@ const Signup = () => {
 
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/todos");
+      router.push(`/todos`);
     }
   }, [status]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    signIn("google", { callbackUrl: "http://localhost:3000/todos" });
+    signIn("Credentials");
   };
 
   return (
@@ -45,7 +45,7 @@ const Signup = () => {
               md={7}
               sx={{
                 backgroundImage:
-                  "url(https://source.unsplash.com/random?wallpapers)",
+                  "url(https://source.unsplash.com/random?shape)",
                 backgroundRepeat: "no-repeat",
                 backgroundColor: "gray",
                 backgroundPosition: "center",
