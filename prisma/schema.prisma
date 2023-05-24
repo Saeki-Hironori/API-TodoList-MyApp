@@ -15,6 +15,7 @@ model User {
   image               String?
   accounts            Account[]
   sessions            Session[]
+  todos               Todo[]
 }
 
 model Account {
@@ -41,6 +42,7 @@ model Session {
   sessionToken        String    @unique
   userId              String
   expires             DateTime
+
   user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
@@ -53,12 +55,16 @@ model VerificationToken {
 }
 
 model Todo {
-  id                  String    @id @default(cuid())
+  id                  String    @id
+  userId              String    
   title               String     
   status              String?     
   detail              String?     
   createdAt           DateTime  @default(now())
+  updataedAt          DateTime? 
   role                Role      @default(USER)
+
+  user                User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 enum Role {
