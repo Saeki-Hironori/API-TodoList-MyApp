@@ -59,7 +59,7 @@ model Todo {
   userId              String    
   title               String     
   status              String?   @default("new")
-  detail              String?     
+  detail              String?   @default("")
   createdAt           DateTime  @default(now())
   updatedAt           DateTime? @updatedAt
   role                Role      @default(USER)
