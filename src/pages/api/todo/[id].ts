@@ -8,13 +8,14 @@ const handleRequest: NextApiHandler = async (req, res) => {
     // ------------------------------------------------------------
     case "GET":
       const { id } = req.query;
+      console.log(id);
 
-      const todos = await prisma.todo.findUnique({
+      const todo = await prisma.todo.findUnique({
         where: {
           id: Number(id),
         },
       });
-      res.status(200).json({ todos, message: "GET request processed" });
+      res.status(200).json({ todo, message: "GET request processed" });
       break;
     // ------------------------------------------------------------
     default:

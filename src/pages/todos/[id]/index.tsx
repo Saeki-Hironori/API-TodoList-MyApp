@@ -1,12 +1,17 @@
-import React, { useEffect } from "react";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import React from "react";
 import Header from "@/components/organisms/Header";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { TODO } from "@/types/type";
+
+type Props = {
+  todo: TODO;
+  queryParam: string;
+};
 
 export async function getServerSideProps(context: any) {
   const session = await getServerSession(context.req, context.res, authOptions);
+  const queryParam = (await context.query.id) ?? null;
 
   if (!session) {
     return {
@@ -17,19 +22,16 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const res = await fetch(
-    `http://localhost:3000/api/todo/${session?.user?.id}`,
-    {
-      method: "GET",
-    }
-  );
-  const todos = await res.json();
-  return { props: { todos } };
+  const res = await fetch(`http://localhost:3000/api/todo/${queryParam}`, {
+    method: "GET",
+  });
+  const todo = await res.json();
+  return { props: { todo, queryParam } };
 }
 
-const index = () => {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+const index: React.FC<Props> = ({ todo, queryParam }) => {
+  console.log(todo);
+  console.log(queryParam);
 
   return (
     <>
