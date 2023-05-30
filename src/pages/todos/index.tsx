@@ -29,7 +29,7 @@ export async function getServerSideProps(context: any) {
   return { props: { data } };
 }
 
-const index = ({ data }: any) => {
+const Index = ({ data }: any) => {
   const serverTodos = data.todos;
   const [filteredTodos, setFilteredTodos] = useState<TODO[]>(serverTodos);
   const [title, setTitle] = useState("");
@@ -203,4 +203,4 @@ const index = ({ data }: any) => {
   );
 };
 
-export default index;
+export default Index;

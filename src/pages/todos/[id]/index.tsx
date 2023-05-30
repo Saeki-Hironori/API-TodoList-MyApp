@@ -34,7 +34,7 @@ export async function getServerSideProps(context: any) {
   return { props: { data } };
 }
 
-const index: React.FC<Props> = ({ data }) => {
+const Index: React.FC<Props> = ({ data }) => {
   const todo = data.getTodo;
   const [status, setStatus] = useState(todo.status);
   const [title, setTitle] = useState(todo.title);
@@ -119,4 +119,4 @@ const index: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default index;
+export default Index;
