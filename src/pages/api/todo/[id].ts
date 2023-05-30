@@ -3,19 +3,34 @@ import prisma from "../../../../prisma/prisma";
 
 const handleRequest: NextApiHandler = async (req, res) => {
   const { method } = req;
+  const { id } = req.query;
+  const { status, title, detail, createdAt } = req.body;
 
   switch (method) {
     // ------------------------------------------------------------
     case "GET":
-      const { id } = req.query;
-      console.log(id);
-
-      const todo = await prisma.todo.findUnique({
+      const getTodo = await prisma.todo.findUnique({
         where: {
           id: Number(id),
         },
       });
-      res.status(200).json({ todo, message: "GET request processed" });
+      res.status(200).json({ getTodo, message: "GET request processed" });
+      break;
+    // ------------------------------------------------------------
+    case "PUT":
+      console.log("やほお");
+
+      const updateTodo = await prisma.todo.update({
+        where: {
+          id: Number(id),
+        },
+        data: {
+          status: status,
+          title: title,
+          detail: detail,
+        },
+      });
+      res.status(200).json({ updateTodo, message: "UPDATE request processed" });
       break;
     // ------------------------------------------------------------
     default:

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Header from "@/components/organisms/Header";
-import { Box, Button, Select, TextField } from "@mui/material";
+import { Avatar, Box, Button, Select, TextField } from "@mui/material";
 import { TODO } from "@/types/type";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
@@ -75,10 +75,10 @@ const index = ({ data }: any) => {
     // Enterのみ通す⇒KeyboardEvent実行中（キー押下中）は動作キャンセル⇒（キー離したら）handleSubmit実行
     if (e.key !== "Enter") return;
     e.preventDefault();
-    handleCreateOnClick();
+    handleCreateButtonClick();
   };
 
-  const handleCreateOnClick = async () => {
+  const handleCreateButtonClick = async () => {
     if (title !== "") {
       await fetch(`http://localhost:3000/api/todos/${session?.user?.id}`, {
         method: "POST",
@@ -96,17 +96,37 @@ const index = ({ data }: any) => {
     }
   };
 
-  const handleDeleteOnClick = async (todo: TODO) => {
+  const handleDeleteButtonClick = async (todo: TODO) => {
     await fetch(`http://localhost:3000/api/todos/${todo.id}`, {
       method: "DELETE",
     });
   };
 
-  const handleDetailOnClick = (todo: TODO) => {
-    router.push({
-      pathname: `/todos/${todo.id}`,
-      query: { id: `${todo.id}` },
-    });
+  const handleDetailButtonClick = (todo: TODO) => {
+    router.push(`/todos/${todo.id}`);
+  };
+
+  const statusDisplay = (todo: TODO) => {
+    switch (todo.status) {
+      case "new":
+        return (
+          <Avatar sx={{ color: "black", fontSize: "12px", bgcolor: "yellow" }}>
+            新規
+          </Avatar>
+        );
+      case "doing":
+        return (
+          <Avatar sx={{ color: "white", fontSize: "12px", bgcolor: "blue" }}>
+            進行中
+          </Avatar>
+        );
+      case "done":
+        return (
+          <Avatar sx={{ color: "white", fontSize: "12px", bgcolor: "green" }}>
+            完了
+          </Avatar>
+        );
+    }
   };
 
   return (
@@ -123,7 +143,7 @@ const index = ({ data }: any) => {
               }
             >
               <option value="all">すべて</option>
-              <option value="notStarted">新規</option>
+              <option value="new">新規</option>
               <option value="doing">進行中</option>
               <option value="done">完了</option>
             </select>
@@ -131,41 +151,50 @@ const index = ({ data }: any) => {
         </div>
         <ul>
           {filteredTodos.map((todo: TODO) => (
-            <div key={todo.id} style={{ display: "flex" }}>
-              <div style={{ flex: "1" }}> </div>
-              <li style={{ flex: "4", marginBottom: "10px" }}>
-                <Box sx={{}}>
-                  <p>{todo.title}</p>
+            <div key={todo.id} style={{ padding: "0 20%" }}>
+              <li>
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    margin: "5px 0",
+                  }}
+                >
+                  {statusDisplay(todo)}
+                  <div
+                    style={{ flex: "1", display: "flex", alignItems: "center" }}
+                  >
+                    <p style={{ flex: "1", margin: "0 20px" }}>{todo.title}</p>
+                  </div>
                   <Button
                     variant="contained"
                     color="success"
-                    onClick={() => handleDetailOnClick(todo)}
+                    onClick={() => handleDetailButtonClick(todo)}
                   >
                     詳細
                   </Button>
                   <Button
                     variant="contained"
                     color="error"
-                    onClick={() => handleDeleteOnClick(todo)}
+                    onClick={() => handleDeleteButtonClick(todo)}
                   >
                     削除
                   </Button>
                 </Box>
               </li>
-              <div style={{ flex: "1" }}> </div>
             </div>
           ))}
         </ul>
-        <Box sx={{ textAlign: "center" }}>
+        <Box sx={{ textAlign: "center", padding: "0 20%" }}>
           <TextField
             label="新しいTodo"
             variant="standard"
             value={title}
             onChange={handleOnChange}
             onKeyDown={handleOnKeyDown}
-            sx={{ width: "500px" }}
+            sx={{ width: "50%" }}
           />
-          <Button variant="contained" onClick={handleCreateOnClick}>
+          <Button variant="contained" onClick={handleCreateButtonClick}>
             作成
           </Button>
         </Box>
