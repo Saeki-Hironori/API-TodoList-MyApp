@@ -40,9 +40,11 @@ const index: React.FC<Props> = ({ data }) => {
   const [title, setTitle] = useState(todo.title);
   const [detail, setDetail] = useState(todo.detail);
   const [createdAt, setCreatedAt] = useState(new Date(todo.createdAt));
+  const [updatedAt, setUpdatedAt] = useState(new Date(todo.updatedAt!));
 
   const router = useRouter();
   const createdAtToLocale = createdAt.toLocaleString();
+  const updatedAtToLocale = updatedAt.toLocaleString();
 
   const handleBackButtonClick = () => {
     router.push("/todos");
@@ -71,17 +73,19 @@ const index: React.FC<Props> = ({ data }) => {
       </Button>
       <ul>
         <li>
-          status :
-          <select
-            value={status}
-            onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-              setStatus(e.target.value)
-            }
-          >
-            <option value="new">新規</option>
-            <option value="doing">進行中</option>
-            <option value="done">完了</option>
-          </select>
+          <div>
+            status :
+            <select
+              value={status}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                setStatus(e.target.value)
+              }
+            >
+              <option value="new">新規</option>
+              <option value="doing">進行中</option>
+              <option value="done">完了</option>
+            </select>
+          </div>
         </li>
         <li>
           title :
@@ -106,6 +110,7 @@ const index: React.FC<Props> = ({ data }) => {
           />
         </li>
         <li>createdAt : {createdAtToLocale}</li>
+        <li>updatedAt : {updatedAtToLocale}</li>
       </ul>
       <Button variant="outlined" onClick={handleUpdateButtonClick}>
         更新する
