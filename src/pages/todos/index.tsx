@@ -30,7 +30,14 @@ export async function getServerSideProps(context: any) {
   return { props: { data } };
 }
 
-const Index = ({ data }: any) => {
+type Props = {
+  data: {
+    todos: TODO[];
+    message: string;
+  };
+};
+
+const Index = ({ data }: Props) => {
   const serverTodos = data.todos;
   const [filteredTodos, setFilteredTodos] = useState<TODO[]>(serverTodos);
   const [title, setTitle] = useState("");

@@ -16,8 +16,6 @@ const Header = () => {
     signOut();
   };
 
-  console.log(session?.user);
-
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>

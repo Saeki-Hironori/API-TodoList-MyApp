@@ -48,21 +48,21 @@ export const authOptions: NextAuthOptions = {
     updateAge: 60 * 60 * 24, // 24 hours
   },
 
-  // useSecureCookies: process.env.NODE_ENV === "production",
+  useSecureCookies: process.env.NODE_ENV === "production",
 
   pages: {
     signIn: "signup",
   },
 
-  // callbacks: {
-  //   async redirect({ baseUrl }) {
-  //     return baseUrl;
-  //   },
-  //   async session({ session, user }) {
-  //     if (session?.user) session.user.id = user.id;
-  //     return session;
-  //   },
-  // },
+  callbacks: {
+    async redirect({ baseUrl }) {
+      return baseUrl;
+    },
+    async session({ session, user }) {
+      if (session?.user) session.user.id = user.id;
+      return session;
+    },
+  },
 };
 
 export default NextAuth(authOptions);
