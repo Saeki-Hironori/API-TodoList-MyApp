@@ -1,11 +1,12 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import Header from "@/components/organisms/Header";
-import { Avatar, Box, Button, Select, TextField } from "@mui/material";
-import { TODO } from "@/types/type";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]";
+
+import Header from "@/components/organisms/Header";
+import { Avatar, Box, Button, TextField } from "@mui/material";
+import { TODO } from "@/types/type";
 
 export async function getServerSideProps(context: any) {
   const session = await getServerSession(context.req, context.res, authOptions);

@@ -1,4 +1,3 @@
-import React from "react";
 import { NextApiHandler } from "next";
 import prisma from "../../../../prisma/prisma";
 
