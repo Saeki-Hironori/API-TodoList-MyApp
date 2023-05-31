@@ -14,7 +14,7 @@ const handleRequest: NextApiHandler = async (req, res) => {
           id: Number(id),
         },
       });
-      res.status(200).json({ todo, message: "GET request processed" });
+      res.status(200).json({ todo });
       break;
     // ------------------------------------------------------------
     default:
