@@ -7,11 +7,11 @@ const handleRequest: NextApiHandler = async (req, res) => {
   switch (method) {
     // ------------------------------------------------------------
     case "GET":
-      const { userId } = req.body;
+      const { userId } = req.query;
 
       const todos = await prisma.todo.findMany({
         where: {
-          userId: userId,
+          userId: String(userId),
         },
         orderBy: {
           createdAt: "asc",
