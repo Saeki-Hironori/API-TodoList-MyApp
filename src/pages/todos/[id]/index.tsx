@@ -50,9 +50,6 @@ const Index = ({ data }: any) => {
   const createdAtToLocale = createdAt.toLocaleString();
   const updatedAtToLocale = updatedAt.toLocaleString();
 
-  console.log("動いた");
-  console.log(todo);
-
   const handleBackButtonClick = () => {
     router.push("/todos");
   };
