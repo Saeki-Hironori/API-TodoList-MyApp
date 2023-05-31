@@ -29,7 +29,7 @@ export async function getServerSideProps(context: any) {
   }
 
   const res = await fetch(
-    `https://api-todo-list-my-app.vercel.app/api/todo/${pathParam}`,
+    `https://api-todolist-myapp.vercel.app/api/todo/${pathParam}`,
     {
       method: "GET",
     }
@@ -55,7 +55,7 @@ const Index = ({ data }: any) => {
   };
 
   const handleUpdateButtonClick = async () => {
-    await fetch(`https://api-todo-list-my-app.vercel.app/api/todo/${todo.id}`, {
+    await fetch(`https://api-todolist-myapp.vercel.app/api/todo/${todo.id}`, {
       method: "PUT",
       body: JSON.stringify({ status, title, detail, createdAt }),
       headers: {
