@@ -50,9 +50,9 @@ export const authOptions: NextAuthOptions = {
 
   useSecureCookies: process.env.NODE_ENV === "production",
 
-  pages: {
-    signIn: "auth/signin",
-  },
+  // pages: {
+  //   signIn: "auth/signin",
+  // },
 
   callbacks: {
     async redirect({ baseUrl }) {
