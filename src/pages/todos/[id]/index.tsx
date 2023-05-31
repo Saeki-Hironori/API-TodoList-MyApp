@@ -35,7 +35,6 @@ export async function getServerSideProps(context: any) {
   return { props: { data } };
 }
 
-// コメント
 const Index = ({ data }: any) => {
   const todo = data.getTodo;
   const [status, setStatus] = useState(todo.status);
