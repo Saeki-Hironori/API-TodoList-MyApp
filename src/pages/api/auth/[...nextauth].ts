@@ -58,6 +58,7 @@ export const authOptions: NextAuthOptions = {
     async redirect({ baseUrl }) {
       return baseUrl;
     },
+    // sessionがデフォルトでemail,image,nameしか持たない為、id(uid)を拡張させる
     async session({ session, user }) {
       if (session?.user) session.user.id = user.id;
       return session;
