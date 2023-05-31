@@ -4,7 +4,7 @@ import prisma from "../../../../prisma/prisma";
 const handleRequest: NextApiHandler = async (req, res) => {
   const { method } = req;
   const { id } = req.query;
-  const { status, title, detail, createdAt } = req.body;
+  const { status, title, detail } = req.body;
 
   switch (method) {
     // ------------------------------------------------------------
@@ -18,8 +18,6 @@ const handleRequest: NextApiHandler = async (req, res) => {
       break;
     // ------------------------------------------------------------
     case "PUT":
-      console.log("やほお");
-
       const updateTodo = await prisma.todo.update({
         where: {
           id: Number(id),
