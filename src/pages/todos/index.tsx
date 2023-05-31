@@ -41,7 +41,7 @@ const Index = ({ data }: any) => {
   const { data: session, status } = useSession();
 
   console.log("動いた");
-  console.log(todo);
+  console.log(serverTodos);
 
   useEffect(() => {
     filterTodos();
