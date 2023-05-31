@@ -72,6 +72,7 @@ const Index = ({ data }: any) => {
   const handleOnChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    e.preventDefault();
     setTitle(e.target.value);
   };
 
