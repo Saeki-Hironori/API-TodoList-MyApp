@@ -26,6 +26,7 @@ export async function getServerSideProps(context: any) {
       method: "GET",
     }
   );
+
   const data = await res.json();
   return { props: { data } };
 }
