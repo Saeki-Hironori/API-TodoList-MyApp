@@ -3,15 +3,14 @@ import prisma from "../../../../prisma/prisma";
 
 const handleRequest: NextApiHandler = async (req, res) => {
   const { method } = req;
+  const { id } = req.query;
 
   switch (method) {
     // ------------------------------------------------------------
     case "GET":
-      const { userId } = req.query;
-
       const todos = await prisma.todo.findMany({
         where: {
-          userId: String(userId),
+          userId: String(id),
         },
         orderBy: {
           createdAt: "asc",
@@ -31,8 +30,6 @@ const handleRequest: NextApiHandler = async (req, res) => {
       break;
     // ------------------------------------------------------------
     case "DELETE":
-      const { id } = req.query;
-
       await prisma.todo.delete({
         where: {
           id: Number(id),
