@@ -40,9 +40,6 @@ const Index = ({ data }: any) => {
   const router = useRouter();
   const { data: session, status } = useSession();
 
-  console.log("動いた");
-  console.log(serverTodos);
-
   useEffect(() => {
     filterTodos();
   }, [status, effect, filter]);
