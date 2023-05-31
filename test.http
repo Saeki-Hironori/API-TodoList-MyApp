@@ -1,1 +1,1 @@
-GET http://localhost:3000/api/allTodos
+GET https://api-todo-list-my-app.vercel.app/api/todos

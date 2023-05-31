@@ -21,7 +21,7 @@ export async function getServerSideProps(context: any) {
   }
 
   const res = await fetch(
-    `http://localhost:3000/api/todos/${session?.user?.id}`,
+    `https://api-todo-list-my-app.vercel.app/api/todos/${session?.user?.id}`,
     {
       method: "GET",
     }
@@ -81,16 +81,19 @@ const Index = ({ data }: any) => {
 
   const handleCreateButtonClick = async () => {
     if (title !== "") {
-      await fetch(`http://localhost:3000/api/todos/${session?.user?.id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: session?.user?.id,
-          title: title,
-        }),
-      });
+      await fetch(
+        `https://api-todo-list-my-app.vercel.app/api/todos/${session?.user?.id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: session?.user?.id,
+            title: title,
+          }),
+        }
+      );
       setTitle("");
     } else {
       alert("何か入力せえ");
@@ -98,9 +101,12 @@ const Index = ({ data }: any) => {
   };
 
   const handleDeleteButtonClick = async (todo: TODO) => {
-    await fetch(`http://localhost:3000/api/todos/${todo.id}`, {
-      method: "DELETE",
-    });
+    await fetch(
+      `https://api-todo-list-my-app.vercel.app/api/todos/${todo.id}`,
+      {
+        method: "DELETE",
+      }
+    );
   };
 
   const handleDetailButtonClick = (todo: TODO) => {

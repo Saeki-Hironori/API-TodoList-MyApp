@@ -28,9 +28,12 @@ export async function getServerSideProps(context: any) {
     };
   }
 
-  const res = await fetch(`http://localhost:3000/api/todo/${pathParam}`, {
-    method: "GET",
-  });
+  const res = await fetch(
+    `https://api-todo-list-my-app.vercel.app/api/todo/${pathParam}`,
+    {
+      method: "GET",
+    }
+  );
   const data = await res.json();
   return { props: { data } };
 }
@@ -52,7 +55,7 @@ const Index = ({ data }: any) => {
   };
 
   const handleUpdateButtonClick = async () => {
-    await fetch(`http://localhost:3000/api/todo/${todo.id}`, {
+    await fetch(`https://api-todo-list-my-app.vercel.app/api/todo/${todo.id}`, {
       method: "PUT",
       body: JSON.stringify({ status, title, detail, createdAt }),
       headers: {
