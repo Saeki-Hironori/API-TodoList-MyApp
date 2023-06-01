@@ -82,7 +82,7 @@ const Signup = () => {
                   onSubmit={handleSubmit}
                   sx={{ mt: 1 }}
                 >
-                  <TextField
+                  {/* <TextField
                     margin="normal"
                     required
                     fullWidth
@@ -113,7 +113,7 @@ const Signup = () => {
                     sx={{ mt: 3, mb: 2 }}
                   >
                     Sign In
-                  </Button>
+                  </Button> */}
                   <Button
                     type="button"
                     fullWidth
@@ -126,7 +126,7 @@ const Signup = () => {
                   >
                     Sign In by Google
                   </Button>
-                  <Button
+                  {/* <Button
                     type="button"
                     fullWidth
                     variant="contained"
@@ -137,7 +137,7 @@ const Signup = () => {
                     sx={{ mt: 1, mb: 2 }}
                   >
                     Sign In by Github
-                  </Button>
+                  </Button> */}
                   <Grid container>
                     <Grid item xs>
                       <Link href="#" variant="body2">
@@ -161,61 +161,3 @@ const Signup = () => {
 };
 
 export default Signup;
-
-{
-  /* <header>
-<noscript>
-  <style>{`.nojs-show { opacity: 1; top: 0; }`}</style>
-</noscript>
-<div className={styles.signedInStatus}>
-  <p
-    className={`nojs-show ${
-      !session && loading ? styles.loading : styles.loaded
-    }`}
-  >
-    {!session && (
-      <>
-        <span className={styles.notSignedInText}>
-          You are not signed in
-        </span>
-        <a
-          href={`/api/auth/signin`}
-          className={styles.buttonPrimary}
-          onClick={(e) => {
-            e.preventDefault();
-            signIn();
-          }}
-        >
-          Sign in
-        </a>
-      </>
-    )}
-    {session?.user && (
-      <>
-        {session.user.image && (
-          <span
-            style={{ backgroundImage: `url('${session.user.image}')` }}
-            className={styles.avatar}
-          />
-        )}
-        <span className={styles.signedInText}>
-          <small>Signed in as</small>
-          <br />
-          <strong>{session.user.email ?? session.user.name}</strong>
-        </span>
-        <a
-          href={`/api/auth/signout`}
-          className={styles.button}
-          onClick={(e) => {
-            e.preventDefault();
-            signOut();
-          }}
-        >
-          Sign out
-        </a>
-      </>
-    )}
-  </p>
-</div>
-</header> */
-}
