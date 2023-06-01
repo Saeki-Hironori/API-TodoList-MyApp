@@ -104,6 +104,14 @@ const Index: React.FC<Props> = ({ data }) => {
           }),
         }
       );
+      const res = await fetch(
+        `https://api-todolist-myapp.vercel.app/api/todos/${session?.user?.id}`,
+        {
+          method: "GET",
+        }
+      );
+      const data = await res.json();
+      setFilteredTodos(data.getTodo);
       setTitle("");
     } else {
       alert("何か入力せえ");
