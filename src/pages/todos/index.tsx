@@ -122,6 +122,14 @@ const Index: React.FC<Props> = ({ data }) => {
     await fetch(`https://api-todolist-myapp.vercel.app/api/todos/${todo.id}`, {
       method: "DELETE",
     });
+    const res = await fetch(
+      `https://api-todolist-myapp.vercel.app/api/todos/${todo.id}`,
+      {
+        method: "GET",
+      }
+    );
+    const todosObj = await res.json();
+    setFilteredTodos(todosObj.todos);
   };
 
   const handleDetailButtonClick = (todo: TODO) => {
