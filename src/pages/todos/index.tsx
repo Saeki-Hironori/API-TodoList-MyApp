@@ -110,8 +110,8 @@ const Index: React.FC<Props> = ({ data }) => {
           method: "GET",
         }
       );
-      const data = await res.json();
-      setFilteredTodos(data.getTodo);
+      const todosObj = await res.json();
+      setFilteredTodos(todosObj.todos);
       setTitle("");
     } else {
       alert("何か入力せえ");
