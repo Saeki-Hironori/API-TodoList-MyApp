@@ -36,13 +36,13 @@ export const getServerSideProps: GetServerSideProps = async (
 
 type Props = {
   data: {
-    todo: TODO;
+    getTodo: TODO;
     message: string;
   };
 };
 
 const Index: React.FC<Props> = ({ data }) => {
-  const todo = data.todo;
+  const todo = data.getTodo;
   const [status, setStatus] = useState(todo.status);
   const [title, setTitle] = useState(todo.title);
   const [detail, setDetail] = useState(todo.detail);
