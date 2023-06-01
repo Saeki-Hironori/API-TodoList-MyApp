@@ -65,14 +65,6 @@ const Index: React.FC<Props> = ({ data }) => {
         "Content-Type": "application/json",
       },
     });
-    const res = await fetch(
-      `https://api-todolist-myapp.vercel.app/api/todo/${todo.id}`,
-      {
-        method: "GET",
-      }
-    );
-    const dataObj = await res.json();
-    setTodo(dataObj);
   };
 
   return (
