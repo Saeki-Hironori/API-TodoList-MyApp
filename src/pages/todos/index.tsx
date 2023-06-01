@@ -7,8 +7,11 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import Header from "@/components/organisms/Header";
 import { Avatar, Box, Button, TextField } from "@mui/material";
 import { TODO } from "@/types/type";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (!session) {
@@ -29,7 +32,7 @@ export async function getServerSideProps(context: any) {
 
   const data = await res.json();
   return { props: { data } };
-}
+};
 
 type Props = {
   data: {
@@ -38,7 +41,7 @@ type Props = {
   };
 };
 
-const Index = ({ data }: Props) => {
+const Index: React.FC<Props> = ({ data }) => {
   const serverTodos = data.todos;
   const [filteredTodos, setFilteredTodos] = useState<TODO[]>(serverTodos);
   const [title, setTitle] = useState("");
@@ -74,9 +77,7 @@ const Index = ({ data }: Props) => {
     }
   }, [filter]);
 
-  const handleOnChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setTitle(e.target.value);
   };

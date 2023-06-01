@@ -1,23 +1,19 @@
 import React, { useState } from "react";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { useRouter } from "next/router";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 import { Button, TextField } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { TODO } from "@/types/type";
 import Header from "@/components/organisms/Header";
 
-type Props = {
-  data: {
-    getTodo: TODO;
-    message: string;
-  };
-};
-
-export async function getServerSideProps(context: any) {
+export const getServerSideProps: GetServerSideProps = async (
+  context: GetServerSidePropsContext
+) => {
   const session = await getServerSession(context.req, context.res, authOptions);
-  const pathParam = context.params.id;
+  const pathParam = context.params?.id;
 
   if (!session) {
     return {
@@ -36,10 +32,17 @@ export async function getServerSideProps(context: any) {
   );
   const data = await res.json();
   return { props: { data } };
-}
+};
 
-const Index = ({ data }: any) => {
-  const todo = data.getTodo;
+type Props = {
+  data: {
+    todo: TODO;
+    message: string;
+  };
+};
+
+const Index: React.FC<Props> = ({ data }) => {
+  const todo = data.todo;
   const [status, setStatus] = useState(todo.status);
   const [title, setTitle] = useState(todo.title);
   const [detail, setDetail] = useState(todo.detail);
